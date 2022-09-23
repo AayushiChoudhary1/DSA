@@ -1,15 +1,13 @@
 #include <bits/stdc++.h>
 #include <string>
 using namespace std;
-
-
 //create function to calculate the length of string
 int lengthString( char name[]){
 	int count=0;
 	for(int i=0; name[i]!='\0'; i++){
 		count++;
 	}
-	return count;
+	return count; 
 }
 
 int main(){
@@ -19,11 +17,9 @@ int main(){
 	cin>>str;
 	cout<<str<<endl;
 	
-	//not call the funtion
+	//now call the funtion of lengthString 
 	
 	cout<<"total length: "<<lengthString(str);
-	
-	
 	
 }
 
