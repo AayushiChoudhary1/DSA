@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
+int power(int x,int n){
+	
+	if(n == 0){
+		return 1;
+	}
+	int pwx = power(x, n-1);
+	int total = x * pwx;
+	return total;
+
+}
+
+
+int main(){
+	
+	int a;
+	cout<<"enter the factorial number: ";
+	cin>>a;
+	cout<<endl;
+	int n;
+	cout<<"enter the number : ";
+	cin>>n;
+
+	cout<<endl;
+	
+	cout<<power(a,n);
+}
