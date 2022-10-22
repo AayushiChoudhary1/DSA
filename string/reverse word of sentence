@@ -1,0 +1,37 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+
+string reverseSentence(string s){
+	
+	string word="";
+	stack<string> st;
+	for(int i=0; i<s.size();i++){
+		if(s[i] != ' ' ){
+			word += s[i];
+		}
+		if(s[i] == ' '){
+			st.push(word);
+			word = "";
+		}
+	}
+	
+	st.push(word);
+	string res="";
+	
+	while(!st.empty()){
+		string str = st.top();
+		st.pop();
+		res += str + " ";
+		
+	}
+	
+	return res;
+}
+
+int main(){
+	string s="hello i am aayushi";
+	cout<<"input:    "<<s<<endl;
+	 string print = reverseSentence(s);
+	 cout<<print;
+}
