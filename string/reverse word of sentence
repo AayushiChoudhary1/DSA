@@ -16,7 +16,7 @@ string reverseSentence(string s){
 		}
 	}
 	
-	st.push(word);
+	st.push(word);//----------------------this is for last remaing word
 	string res="";
 	
 	while(!st.empty()){
