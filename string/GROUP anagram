@@ -1,0 +1,30 @@
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        
+        unordered_map<string, vector<string>> m;
+        
+        for(auto str : strs){
+		
+			// we will store the current word in a variable as
+			// we may lose the original word after sorting but we do need the original word
+            string word = str; 
+            sort(str.begin(), str.end());
+			
+			// Anagrams with same key after sorting will be stored in the same vector
+            m[str].push_back(word);
+        }
+        
+        vector<vector<string>> ans;
+        
+		// Now in the map we don't need the key but only the value
+		// so we group all the value in a vector and return as ans. 
+		
+        for(auto anagram : m){
+			// anagram.first is key, anagram.second is value, we only need the "value" so
+            ans.push_back(anagram.second); 
+        }
+        
+        return ans;
+    }
+};
