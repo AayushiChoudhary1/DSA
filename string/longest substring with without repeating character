@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        unordered_map<char,int>umap;
+        int i=0, j=0, ans=0;
+        int n = s.size();
+         while(j < n){
+            umap[s[j]]++;
+            //compare map size with window length;
+            if(umap.size() == j-i+1){
+                ans = max(ans,j-i+1);
+                j++;
+            }
+            
+            else if(umap.size() < j-i+1){
+                while(umap.size() < j-i+1){
+                    umap[s[i]]--;
+                    if(umap[s[i]] == 0){
+                         umap.erase(s[i]);
+                    }
+                  
+                    i++;
+                }
+                j++;
+            }
+        }
+        return ans;
+    }
+};
