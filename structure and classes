@@ -1,0 +1,35 @@
+
+
+***********************************for create teachers details like---salary, name, gender etc********************************************************************
+#include<iostream>
+using namespace std;
+
+
+struct teacher{
+	string name;
+	int age;
+	int salary;
+	bool english;
+	string gender;
+	
+	void teacherDetails(){
+		cout<<"name is: "<<name<<endl;
+		cout<<"age is: "<<age<<endl;
+		cout<<"salary is: "<<salary<<endl;
+		cout<<"english knows: "<<english<<endl;
+		cout<<"gender: "<<gender<<endl;
+	}
+	
+};
+
+
+
+int main(){
+	struct teacher emp[2]={ {"aman",21,2000, true, "male" } , {"esha",20,2000,false,"female"} };
+	for(int i=0; i<2;i++){
+		emp[i].teacherDetails();
+		cout<<endl;
+	}
+}
+
+
