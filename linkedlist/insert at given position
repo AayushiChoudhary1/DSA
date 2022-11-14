@@ -1,0 +1,85 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+class node {
+	public:
+			int data;
+			node *next;
+			node(int value){
+			    data = value;
+		        next = NULL;
+	}
+};
+
+
+
+//insert node at head
+
+void insertAtHead(node *&head, int value){
+	node *n = new node(value);
+	n->next = head;
+	head = n;
+	
+}
+
+void display(node *&head){
+	node *temp = head;
+	while(temp != NULL){
+		cout<<temp->data<<endl;
+		temp = temp->next;
+	}
+}
+
+//insert node at given position
+void pushNode(node *&head, int key, int value){
+	
+	node *n = new node(value);
+	n->next = NULL;
+	
+	if(key == 1){
+		n->next = head;
+		head = n;
+		return;
+	}
+	
+	node *temp = head;
+	for(int i=1; i<=key; i++){
+		temp = temp->next;
+		if(temp == NULL){
+			return ;
+		}
+	}
+	
+	n->next = temp->next;
+	temp->next = n;
+	
+}
+void insertAtTail(node *&head, int value){
+	node *n = new node(value);
+	n->next  = NULL;
+	if(head == NULL){
+		head = n;
+		return;
+	}
+	node *temp = head;
+	while(temp->next!=NULL){
+		temp = temp->next;
+	}
+	temp->next = n;
+	
+}
+
+
+int main(){
+	node *head =NULL;
+	insertAtHead(head,3);
+	insertAtHead(head,2);
+	insertAtHead(head,1);
+
+	pushNode(head, 1,6);
+	
+	insertAtTail(head,80);	
+	pushNode(head, 4,10);
+	
+	display(head);
+}
