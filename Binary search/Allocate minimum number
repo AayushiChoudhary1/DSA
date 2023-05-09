@@ -1,0 +1,39 @@
+ int findPages(int A[], int N, int M) 
+    {
+        int start=-1, end=0, ans;
+        
+        if(N<M) {
+            return -1;
+        }
+        
+        for(int i=0; i<N; i++){
+            end += A[i];
+            if(start < A[i])
+                start = A[i];
+        }
+        
+        while(start<=end){
+            int mid = end + (start-end)/2;
+            int sum = 0, count = 1;
+            
+            for(int i=0; i<N; i++){
+                sum += A[i];
+                if(sum > mid){
+                    count++;
+                    sum = A[i];
+                }
+            }
+            
+            if(count<=M){
+                ans = mid;
+                end = mid -1;
+            }
+            
+            else{
+                start = mid+1;
+            }
+            
+        }
+        
+        return ans;
+    }
