@@ -1,0 +1,51 @@
+
+****************************************************************FIRST METHOD USING LINEAR SEARCH********************************************************************
+int findKRotation(int arr[], int n) {
+	   
+	    for(int i=0; i<n-1; i++){
+	             if(arr[i+1] < arr[i])
+	                  return i+1;
+	    }
+	    return 0;
+	}
+
+************************************************************************second method USING BINARY SEARCH *****************************************************************************
+log(n)
+int findKRotation(int arr[], int n) {
+	    int start = 0, end = n-1;
+	    if(arr[start]<= arr[end]){
+	        return 0; }
+	    
+	    while(start<=end){
+	        int mid = end + (start-end)/2;
+	        int prev = mid-1;
+	        int next =  mid+1;
+	        
+	        if(arr[mid]<=arr[prev] && arr[mid]<=arr[next])
+	            return mid;	      
+	        else if(arr[mid]<=arr[end]){
+	            end = mid-1;
+	        }
+	        else if(arr[start]<=arr[mid]){
+	            start = mid+1;
+	        }
+	    }
+	*******************************************************************THIRD SOLUTION USING PIVOT Binary search***************************************************************
+  Time complexity(log(n)
+  int findKRotation(int arr[], int n) {
+	    
+	    int start = 0, end=n-1, index=-1, pivot=arr[0];
+	     if(arr[start]<arr[end] || n==1){
+	        return 0; }
+	    
+	    while(start<=end){
+	        int mid = end + (start-end)/2;
+	         if(arr[mid]>=pivot){
+	            index = mid;
+	            start = mid+1;
+	        }
+	        else 
+	             end =mid-1;
+          }
+	    return (index+1);
+	}
