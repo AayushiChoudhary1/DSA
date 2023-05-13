@@ -1,0 +1,47 @@
+
+link : https://practice.geeksforgeeks.org/problems/ffd66b6a0bf7cefb9987fa455974b6ea5695709e/1
+
+**********************************************************************************************************************************************************
+
+dekho tum glti ye kr rhe the ki tumne low ko min height of tree set kiya tha ab ye v to possible h ki usse kam katna pde
+
+Example :- 
+
+5 6 7 8 9
+k = 5
+
+iska answer h = 1 hoga
+
+ab tumne l = 5, ur r = 9 set kiya to galt ho jata
+
+
+*******************************************************************************************************************************************************
+
+
+  int find_height(int tree[], int n, int k)
+    {
+        int start = 0, end =1000;
+        
+        while(start<=end){
+            int mid = end + (start-end)/2;
+            int sum =0;
+            int wood;
+            for(int i=0; i<n; i++){
+                if(tree[i]>mid)
+                    sum += tree[i]-mid;
+            }
+            
+            if(sum == k)
+                return mid;
+            if(sum > k)
+                start = mid+1;
+            else 
+                end = mid-1;
+        }
+        
+        return -1;
+    }
+    
+    
+    
+    
