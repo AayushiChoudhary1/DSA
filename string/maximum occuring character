@@ -1,0 +1,25 @@
+char getMaxOccuringChar(string str)
+    {
+        int count[26];
+        for(int i=0; i<26; i++)
+            count[i]=0;
+        
+        //calculate frequency
+        for(int i=0; i<str.size(); i++)
+        {
+            int index= str[i]-'a';
+            count[index]++;
+        }
+        
+        //calculate maximum
+        int max=-1, ans;
+        for(int i=0;i<26;i++)
+        {
+            if(count[i]>max){
+                max = count[i];
+                ans = i;
+            }
+        }
+        
+            return 'a' + ans;
+    }
