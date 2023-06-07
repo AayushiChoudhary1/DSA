@@ -1,0 +1,41 @@
+
+a= amazon
+b= onamaz
+In line number-20, a+=a,  we create amazonamazon
+and then match the char one by one
+                 amazonamazon
+                     ||||||||
+                     ||||||||
+                     ||||||||
+                     onamaon
+
+
+
+
+
+bool isRotated(string a, string b){
+        int n=a.size(), m=b.size();
+        if(n != m) return false;
+        
+        a += a;
+        bool left=true;
+        for(int i=2, j=0; j<n; i++, j++){
+            if(a[i] != b[j]){
+                left=false;
+                break;
+            }
+        }
+        
+        if(left) return true;
+        
+        bool right=true;
+        for(int i=n-2, j=0; j<n; i++, j++){
+            if(a[i] != b[j]){
+                right=false;
+                break;
+            }
+        }
+        
+        if(right) return true;
+        return false;
+    }
