@@ -1,0 +1,27 @@
+
+
+
+void find(Node *root, long long &sum, long long num)
+{
+    if(!root)
+    return;
+    
+    num = num + root->data;
+    
+    if(!root->left && !root->right)
+    {
+        sum += num;
+        return;
+    }
+    
+    find(root->left, sum, num*10);
+    find(root->right, sum, num*10);
+};
+
+long long treePathsSum(Node *root)
+{
+    long long sum =0;
+    long long num = 0;
+    find(root, sum, num);
+    return sum;
+}
