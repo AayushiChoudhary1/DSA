@@ -1,0 +1,19 @@
+void Find(Node *root, int Anc_max, int &diff)
+{
+    if(!root)
+    return;
+    
+    diff = max(diff, Anc_max - root->data);
+    Anc_max = max(Anc_max, root->data);
+    
+    Find(root->left, Anc_max, diff);
+    Find(root->right, Anc_max, diff);
+}
+
+int maxDiff(Node* root)
+{
+    int diff = INT_MIN;
+    Find(root->left, root->data, diff);
+    Find(root->right, root->data, diff);
+    return diff;
+}
