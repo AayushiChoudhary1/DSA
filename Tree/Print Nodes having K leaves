@@ -1,0 +1,28 @@
+ int find(Node*root, vector<int>&count, int k){
+        if(!root)
+        return 0;
+        
+        if(!root->left && !root->right)
+            return 1;
+            
+        int left = find(root->left, count, k);
+        int right = find(root->right, count, k);
+        
+        if(k==left+right)
+            {
+                count.push_back(root->data);
+            }
+            
+        return left+right;
+        
+    };
+    
+    vector<int> btWithKleaves(Node *ptr, int k)
+    { 
+        vector<int> count;
+        find(ptr, count, k);
+        
+        if(count.empty())
+        count.push_back(-1);
+        return count;
+    }
