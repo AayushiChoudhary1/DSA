@@ -1,0 +1,10 @@
+//Important point->
+//   No head reference is given to you. It is guaranteed that the node to be deleted is not a tail node in the linked list
+
+
+
+    void deleteNode(Node *del)
+    {
+       del->data = del->next->data;
+       del->next = del->next->next;
+    }
