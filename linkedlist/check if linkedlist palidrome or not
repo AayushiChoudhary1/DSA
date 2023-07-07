@@ -1,0 +1,49 @@
+
+
+  Node *reverse(Node *curr) ------------------
+  {                                          |
+      Node *prev=NULL, *next;                |
+      while(curr)                            |
+      {                                      |
+          next = curr->next;                  =========================================for reverse the list after the middle nodes
+          curr->next = prev;                 |
+          prev = curr;                       |
+          curr = next;                       |
+      }
+      return prev;                           |
+  }         ---------------------------------                      
+  
+    //Function to check whether the list is palindrome.
+    bool isPalindrome(Node *head)
+    {
+        if(head->next == NULL)
+            return 1;
+        
+        Node *first = head, *second = head;
+        int count = 0;
+        while(first) -------------------------------------------------------->this loop count the no of nodes in the list
+        {
+            count ++;
+            first = first->next;
+        };
+        count = (count+1)/2-1;
+        while(count--)        
+        {
+            second = second->next;
+        }
+        
+        first = second->next;   ===================================> point first at the node after the middle node
+        second->next = NULL;-------------------------------create to break the list into two part
+        first = reverse(first); -------------------------> call reverse function;
+        second = head; --------------------------------------->now point second at head
+        
+        while(first)----------------------------------------> this loop check the condition of first list and second list for finding palidrome
+        {
+            if(first->data != second->data)
+                 return 0;
+                 first = first->next;
+                 second = second->next;
+        };
+        
+        return 1;
+    }
