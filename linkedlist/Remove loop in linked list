@@ -1,0 +1,43 @@
+if(head == head->next)
+           head->next = NULL;
+        
+        if(!head->next)
+            return;
+            
+        Node *slow = head->next;
+        Node *fast = head->next->next;
+        
+        while(fast && fast->next && fast!=slow)
+        {
+            fast = fast->next->next;
+            slow = slow->next;
+        };
+        
+        
+        
+        if(!fast || !fast->next)
+              return;
+        
+      
+        
+        fast = head;
+       
+        if(fast == slow)
+        {
+            while(slow->next != fast)
+                slow = slow->next;
+                
+             slow->next = NULL;
+             return;
+        }
+        
+        
+       
+        while(fast->next !=  slow->next)
+        {
+            fast = fast->next;
+            slow = slow->next;
+        }
+        
+        slow->next = NULL;
+        return;
