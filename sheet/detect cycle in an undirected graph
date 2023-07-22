@@ -1,0 +1,84 @@
+
+//dfs-----------method
+
+bool DetectCycle(vector<int>adj[], int node, int parent, vector<bool>visited)
+    {
+        visited[node]=1;
+        for(int i=0; i<adj[node].size(); i++)
+        {
+            //if adjacent node is not visited
+            if(!visited[adj[node][i]])
+            {
+                if(DetectCycle(adj, adj[node][i],node,visited))
+                return 1;
+            }
+            // if adjacent node is visited  and adjacent node not equal to parent node
+            else if(parent!=adj[node][i])
+                return 1;
+        }
+        
+        return 0;
+    }
+    
+    bool isCycle(int v, vector<int> adj[]) {
+        
+       vector<bool>visited(v,0);
+       for(int i=0; i<v; i++)
+       {
+           if(!visited[i])
+           {
+               if(DetectCycle(adj, i, -1, visited))
+                   return 1;
+           }
+       }
+       return 0;
+    }
+
+
+
+bfs-----------------------but time complexity max so, it show code need to be optimise
+    bool BFS(int node, vector<int>adj[], vector<bool>visit)
+    {
+        
+        queue<pair<int,int>>q;
+        q.push({node,-1});
+        while(!q.empty())
+        {
+            int child = q.front().first;
+            int parent = q.front().second;
+            
+            for(int i=0; i<adj[child].size();i++)
+            {
+                if(!visit[adj[child][i]])
+                {
+                    visit[adj[child][i]]=1;
+                    q.push({adj[child][i],child});
+                }
+                
+                else
+                {
+                    if(adj[child][i] != parent)
+                    return 1;
+                }
+            }
+        }
+        return 0;
+    }
+  
+    // Function to detect cycle in an undirected graph.
+    bool isCycle(int v, vector<int> adj[]) {
+        vector<bool>visit(v,0);
+      
+        
+        for(int i=0; i<v; i++)
+        {
+            if(!visit[i])
+            {
+            
+                bool ans = BFS(i,adj,visit);
+                if(ans == 1)
+                return 1;
+            }
+        }
+        return 0;
+    }
