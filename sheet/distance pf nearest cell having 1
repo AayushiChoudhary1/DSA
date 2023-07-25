@@ -1,0 +1,49 @@
+
+
+bool check(int i, int j, int row, int col)
+    {
+        return i>-1 && i<row && j>-1 && j<col;
+    }
+    
+    
+	vector<vector<int>>nearest(vector<vector<int>>grid)
+	{
+	   int n = grid.size();
+	   int m = grid[0].size();
+	 
+	   vector<vector<int>>ans(n, vector<int>(m,0));
+	   queue<pair<pair<int,int>,int>>q;
+	   int row[] = {-1,1,0,0};
+	   int col[] = {0,0,-1,1};
+	   
+	   for(int i=0; i<n; i++)
+	   for(int j=0; j<m; j++)
+	   {
+	       if(grid[i][j]==1)
+	       q.push({{i,j},0});
+	   }
+	   
+	   int i,j,step=0;
+	   
+	    int derow[4]= {-1,1,0,0};
+        int decol[4]={0,0,-1,1};
+	   
+	   while(!q.empty())
+	   {
+	       i = q.front().first.first;
+	       j = q.front().first.second;
+	       step = q.front().second;
+	       q.pop();
+	       ans[i][j]=step;
+	       
+	       for(int k = 0; k<4; k++)
+	       {
+	          if(check(i+derow[k], j+decol[k], n, m) &&  grid[i+derow[k]][j+decol[k]]==0)
+	           {
+	               grid[i+derow[k]][j+decol[k]]=1;
+	               q.push({{i+derow[k], j+decol[k]}, step+1});
+	           }
+	           
+	       }
+	   }
+	   return ans;
