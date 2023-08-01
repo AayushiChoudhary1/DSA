@@ -1,0 +1,61 @@
+	void DFS(int node, vector<vector<int>>&adj, stack<int>&s, vector<bool>&visited)
+	{
+	    visited[node]=1;
+	    
+	    for(int i=0; i<adj[node].size(); i++)
+	    {
+	        if(!visited[adj[node][i]])
+	        DFS(adj[node][i], adj, s, visited);
+	    }
+	    s.push(node);
+	}
+	
+	
+	void SCC(int node, vector<bool>&visited, vector<vector<int>>&adj)
+	{
+	    visited[node]=1;
+	    for(int i=0; i<adj[node].size(); i++)
+	    {
+	        if(!visited[adj[node][i]])
+	        SCC(adj[node][i], visited, adj);
+	    }
+	}
+	//Function to find number of strongly connected components in the graph.
+    int kosaraju(int V, vector<vector<int>>& adj)
+    {
+        //1.topological sort
+        stack<int>s;
+        vector<bool> visited(V,0);
+        for(int i=0; i<V; i++)
+        {
+            if(!visited[i])
+            DFS(i, adj, s, visited);
+        }
+        
+        //2.transpose graph
+        vector<vector<int>>trans(V);
+        for(int i=0; i<V; i++)
+        for(int j=0; j<adj[i].size(); j++)
+           trans[adj[i][j]].push_back(i);
+            
+        
+        // again convert visited vector  0 in order to check node is visited or not in case of stack kay element ko visited karety wakt
+        int count =0;
+        for(int i=0; i<V; i++)
+            visited[i]=0;
+    
+        
+        
+        while(!s.empty())
+        {
+            if(!visited[s.top()])
+            {
+                count++;
+                SCC(s.top(), visited, trans);
+            }
+            
+            s.pop();
+        }
+    
+    return count;    
+    }
