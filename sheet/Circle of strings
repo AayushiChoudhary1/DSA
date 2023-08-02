@@ -1,0 +1,47 @@
+void DFS(int node, vector<int> adj[], vector<bool>&visited)
+    {
+        if(visited[node])
+        return;
+        
+        
+        visited[node]=1;
+        
+        for(int i=0; i<adj[node].size(); i++)
+        DFS(adj[node][i], adj, visited);
+    }
+    
+    int isCircle(int N, vector<string> A)
+    {
+        vector<int>adj[26];
+        vector<int>in(26,0);
+        vector<int>out(26,0);
+        
+        string s;
+        for(int i=0; i<N; i++)
+        {    s = A[i];
+            adj[s[0]-'a'].push_back(s[s.size()-1]-'a');
+            out[s[s.size()-1]-'a']++;
+            in[s[0]-'a']++;
+        }
+        
+        int node =-1;
+        for(int i=0; i<26; i++)
+        {
+            if(in[i] != out[i])
+            return 0;
+            
+            if(in[i])
+            node=i;
+        }
+        
+        vector<bool> visited(26,0);
+        DFS(node, adj,visited);
+        
+        for(int i=0; i<26; i++)
+        {
+            if(in[i] && !visited[i])
+            return 0;
+        }
+        
+        return 1;
+    }
