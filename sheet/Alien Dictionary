@@ -1,0 +1,54 @@
+ string findOrder(string dict[], int N, int K) {
+        vector<int>adj[K];
+        vector<int>indegree(26,0);
+        // 1. create adjacent list
+        for(int i=0; i<N-1; i++)
+        {
+            string s1 = dict[i];
+            string s2 =dict[i+1];
+            int j=0, k=0;
+            
+            while(j<s1.size() && s2.size())
+            {
+                if(s1[j] != s2[k])
+                {
+                    adj[s1[j]-'a'].push_back(s2[k]-'a');
+                    indegree[s2[k]-'a']++;
+                    break;
+                }
+                k++;
+                j++;
+            }
+        }
+        
+        
+        // 2.apply khan's algorihtm 
+        queue<int>q;
+        for(int i=0; i<K; i++)
+        {
+            if(!indegree[i])
+            q.push(i);
+        };
+        
+        string ans = "";
+        
+       
+        while(!q.empty())
+        {
+            int node = q.front();
+            q.pop();
+           
+            
+            for(int i=0; i<adj[node].size(); i++)
+            {
+                indegree[adj[node][i]]--;
+                if(indegree[adj[node][i]]==0)
+                q.push(adj[node][i]);
+            }
+            
+            char ch = node + 'a';
+            ans += ch;
+        }
+        
+        return ans;
+    }
