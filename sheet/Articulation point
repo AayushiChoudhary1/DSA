@@ -1,0 +1,56 @@
+ int dfs(int node,vector<int> adj[], vector<int> &dis, vector<int> &low,
+      vector<int> &ans,int &timer ,int parent ,  vector<int> &art)
+    {
+        if(dis[node] != -1)
+           return dis[node] ;
+           
+        timer++ ;
+        dis[node] = low[node] = timer ;
+        int ch = 0;
+        for(auto neighbour : adj[node])
+        {
+            if(neighbour != parent)
+            {
+                if(dis[neighbour] == -1)
+                {
+                    ch++;
+                    low[node] = min(low[node] , dfs(neighbour,adj,dis,low,ans,timer,node,art)) ;
+                    if(dis[node] <= low[neighbour] && parent != -1)
+                    {
+                        art[node] = 1;
+                    }
+                }
+                else
+                {
+                    low[node] = min(low[node],dis[neighbour]);
+                }
+                
+                 
+            }
+        }
+        if(ch > 1 && parent == -1)
+        {
+            art[node] = 1;
+        }
+        return low[node] ;
+    }
+    vector<int> articulationPoints(int V, vector<int>adj[]) 
+    {
+        vector<int> ans ;
+      vector<int> dis(V,-1) ;
+      vector<int> low(V,-1) ;
+      vector<int> art(V,-1);
+      int timer = -1 , parent = -1 ;
+      
+      dfs(0,adj,dis,low,ans,timer,parent,art) ;
+      
+     for(int i = 0; i<V; i++)
+     {
+         if(art[i] != -1)
+         ans.push_back(i);
+     }
+     if(ans.size() == 0)
+     ans.push_back(-1);
+      
+      return ans ;
+    }
