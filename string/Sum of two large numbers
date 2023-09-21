@@ -1,0 +1,63 @@
+  int carry=0, bits=0;
+     string str="";
+     int i=X.size()-1, j=Y.size()-1;
+     
+    
+     while(i>=0 && j>=0){
+         int num1=X[i]-'0';
+         int num2=Y[j]-'0';
+         num1+=num2;
+         num1+=carry;
+         carry=num1/10;
+         bits=num1%10;
+         
+         char c = '0'+bits;
+         str += c;
+         j--, i--;
+     }
+      
+      
+     while(i>=0)
+     {
+         int num1=X[i]-'0';
+         num1+=carry;
+         carry=num1/10;
+         bits=num1%10;
+         char c = '0'+bits;
+         str += c;
+         i--;
+     }
+     
+     while(j>=0)
+     {
+         int num2= Y[j]-'0';
+         num2+=carry;
+         carry=num2/10;
+         bits=num2%10;
+         char c = '0'+bits;
+         str += c;
+         j--;
+     }
+     
+     
+     if(carry)
+     str = str+'1';
+     
+   
+     int k=str.size()-1;
+     while(k>0 && str[k]=='0')
+     {
+         str.pop_back();
+         k--;
+     }
+    
+     int first=0; 
+     int last = str.size()-1;
+     while(first<=last)
+     {
+         swap(str[first], str[last]);
+         first++, last--;
+     }
+     
+   
+     return str;
