@@ -1,0 +1,21 @@
+bool ispar(string x)
+    {
+        stack<char>s;
+        int i=0;
+        while(i<x.size())
+        {
+            if(x[i]=='{' || x[i]=='[' || x[i]=='(')
+            s.push(x[i]);
+            
+            else if(!s.empty())
+            {
+                if((x[i]=='}' && s.top()=='{') || (x[i]==']' && s.top()=='[') || (x[i]==')' && s.top()=='(') )
+                     s.pop();
+                else 
+                return 0;
+            }
+            
+            else 
+            return 0;
+            i++;
+        }
