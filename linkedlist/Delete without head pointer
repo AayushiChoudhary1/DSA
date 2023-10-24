@@ -1,6 +1,7 @@
 //Important point->
 //   No head reference is given to you. It is guaranteed that the node to be deleted is not a tail node in the linked list
 
+//means first copy the data of next node in del node and then delete
 
 
     void deleteNode(Node *del)
